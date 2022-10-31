@@ -30,9 +30,9 @@
         <template #button-content>
           <div class="d-sm-flex d-none user-nav">
             <p class="user-name font-weight-bolder mb-0">
-              John Doe
+              {{ user.name }} {{ user.surname }}
             </p>
-            <span class="user-status">Admin</span>
+            <span class="user-status">Home owner</span>
           </div>
           <b-avatar
             size="40"
@@ -82,7 +82,7 @@
 
         <b-dropdown-divider />
 
-        <b-dropdown-item link-class="d-flex align-items-center">
+        <b-dropdown-item link-class="d-flex align-items-center" @click="logout">
           <feather-icon
             size="16"
             icon="LogOutIcon"
@@ -117,6 +117,19 @@ export default {
     toggleVerticalMenuActive: {
       type: Function,
       default: () => {},
+    },
+  },
+  computed: {
+    user() {
+      return this.$store.getters['auth/user']
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('auth/logout')
+        .then(() => {
+          this.$router.push({ name: 'auth.login' })
+        })
     },
   },
 }

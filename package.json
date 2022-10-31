@@ -3,7 +3,7 @@
   "version": "6.4.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --port 80",
+    "serve": "vue-cli-service serve --port 8080",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -21,7 +21,7 @@
     "@vueuse/core": "4.0.0",
     "animate.css": "4.1.1",
     "apexcharts": "3.23.0",
-    "axios": "0.21.1",
+    "axios": "^0.21.1",
     "axios-mock-adapter": "1.19.0",
     "bootstrap": "4.6.0",
     "bootstrap-vue": "2.21.1",
@@ -63,7 +63,8 @@
     "vue-tree-halower": "1.8.3",
     "vue2-leaflet": "2.5.2",
     "vuedraggable": "2.24.3",
-    "vuex": "3.6.0"
+    "vuex": "3.6.0",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.9",

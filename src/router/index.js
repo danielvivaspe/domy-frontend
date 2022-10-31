@@ -12,10 +12,11 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'app.home',
       component: () => import('@/views/Home.vue'),
       meta: {
         pageTitle: 'Home',
+        middleware: 'auth',
         breadcrumb: [
           {
             text: 'Home',
@@ -40,15 +41,17 @@ const router = new VueRouter({
     },
     {
       path: '/login',
-      name: 'login',
-      component: () => import('@/views/Login.vue'),
+      name: 'auth.login',
+      component: () => import('@/views/auth/Login.vue'),
       meta: {
         layout: 'full',
+        middleware: 'guest',
+        pageTitle: 'Login',
       },
     },
     {
       path: '/error-404',
-      name: 'error-404',
+      name: 'errors.404',
       component: () => import('@/views/error/Error404.vue'),
       meta: {
         layout: 'full',
@@ -59,6 +62,20 @@ const router = new VueRouter({
       redirect: 'error-404',
     },
   ],
+})
+
+router.beforeResolve((to, from, next) => {
+  document.title = `${to.meta.pageTitle} - ${process.env.VUE_APP_NAME}`
+  if (to.meta.middleware === 'guest') {
+    if (router.app.$store.state.auth.authenticated) {
+      next({ name: 'app.home' })
+    }
+    next()
+  } else if (router.app.$store.state.auth.authenticated) {
+    next()
+  } else {
+    next({ name: 'auth.login' })
+  }
 })
 
 // ? For splash screen

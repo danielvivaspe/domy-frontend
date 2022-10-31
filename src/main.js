@@ -2,8 +2,9 @@ import Vue from 'vue'
 import { ToastPlugin, ModalPlugin } from 'bootstrap-vue'
 import VueCompositionAPI from '@vue/composition-api'
 
-import router from './router'
 import store from './store'
+import router from './router'
+import http from './http'
 import App from './App.vue'
 
 // Global Components
@@ -17,6 +18,9 @@ import '@/libs/toastification'
 Vue.use(ToastPlugin)
 Vue.use(ModalPlugin)
 
+// Axios
+Vue.prototype.$http = http
+
 // Composition API
 Vue.use(VueCompositionAPI)
 
@@ -29,7 +33,7 @@ require('@/assets/scss/style.scss')
 Vue.config.productionTip = false
 
 new Vue({
-  router,
   store,
+  router,
   render: h => h(App),
 }).$mount('#app')

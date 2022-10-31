@@ -125,7 +125,6 @@ import {
   BNavItemDropdown, BDropdownItem, BDropdownDivider, BAvatar,
 } from 'bootstrap-vue'
 import { initialAbility } from '@/libs/acl/config'
-import useJwt from '@/auth/jwt/useJwt'
 import { avatarText } from '@core/utils/filter'
 
 export default {
