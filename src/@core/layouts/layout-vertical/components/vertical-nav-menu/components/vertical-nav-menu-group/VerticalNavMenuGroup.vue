@@ -45,7 +45,7 @@ import { resolveVerticalNavMenuItemComponent as resolveNavItemComponent } from '
 import { useUtils as useI18nUtils } from '@core/libs/i18n'
 import { useUtils as useAclUtils } from '@core/libs/acl'
 import VerticalNavMenuHeader from '../vertical-nav-menu-header'
-import VerticalNavMenuLink from '../vertical-nav-menu-link/VerticalNavMenuLink.vue'
+import VerticalNavMenuLink from '../vertical-nav-menu-link/VerticalNavMenuRoomLink.vue'
 
 // Composition Function
 import useVerticalNavMenuGroup from './useVerticalNavMenuGroup'

@@ -19,12 +19,26 @@
 
 <script>
 import { BCard, BCardText, BLink } from 'bootstrap-vue'
+import home from '@/http/requests/home'
 
 export default {
   components: {
     BCard,
     BCardText,
     BLink,
+  },
+  data() {
+    return {
+      home: null,
+    }
+  },
+  mounted() {
+    let homedata = null
+    home.home_details()
+      .then(data => {
+        homedata = data
+      })
+    this.home = homedata
   },
 }
 </script>

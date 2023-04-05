@@ -21,6 +21,16 @@ instance.interceptors.response.use(response => {
   console.debug('RESPONSE INTERCEPTOR')
   console.log(response)
   return response
+}, error => {
+  console.debug('RESPONSE INTERCEPTOR')
+  console.error(error)
+  if (error.response.status === 401) {
+    console.error('Removing auth info...')
+    const data = JSON.parse(localStorage.getItem('vuex'))
+    data.auth.authenticated = false
+    localStorage.setItem('vuex', data)
+    location.reload()
+  }
 })
 
 export default instance

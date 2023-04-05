@@ -40,6 +40,25 @@ const router = new VueRouter({
       },
     },
     {
+      path: '/room/:room',
+      name: 'room',
+      component: () => import('@/views/room/RoomMain.vue'),
+      meta: {
+        pageTitle: '{{room}}',
+        middleware: 'auth',
+        breadcrumb: [
+          {
+            text: 'Rooms',
+            active: false,
+          },
+          {
+            text: '{{room}}',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
       path: '/login',
       name: 'auth.login',
       component: () => import('@/views/auth/Login.vue'),
@@ -65,7 +84,14 @@ const router = new VueRouter({
 })
 
 router.beforeResolve((to, from, next) => {
-  document.title = `${to.meta.pageTitle} - ${process.env.VUE_APP_NAME}`
+  const regex = to.meta.pageTitle.match('{{(.*)}}')
+  if (regex != null) {
+    const [, param] = regex
+    document.title = `${to.params[param]} - ${process.env.VUE_APP_NAME}`
+  } else {
+    document.title = `${to.meta.pageTitle} - ${process.env.VUE_APP_NAME}`
+  }
+
   if (to.meta.middleware === 'guest') {
     if (router.app.$store.state.auth.authenticated) {
       next({ name: 'app.home' })

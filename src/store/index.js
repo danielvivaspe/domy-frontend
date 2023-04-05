@@ -7,6 +7,7 @@ import app from './app'
 import appConfig from './app-config'
 import verticalMenu from './vertical-menu'
 import auth from './auth'
+import home from './home'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     appConfig,
     verticalMenu,
     auth,
+    home,
   },
   plugins: [
     createPersistedState(),

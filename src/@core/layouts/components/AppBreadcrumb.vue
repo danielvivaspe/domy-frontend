@@ -13,7 +13,7 @@
       <b-row class="breadcrumbs-top">
         <b-col cols="12">
           <h2 class="content-header-title float-left pr-1 mb-0">
-            {{ $route.meta.pageTitle }}
+            {{ titleText($route.meta.pageTitle) }}
           </h2>
           <div class="breadcrumb-wrapper">
             <b-breadcrumb>
@@ -30,7 +30,7 @@
                 :active="item.active"
                 :to="item.to"
               >
-                {{ item.text }}
+                {{ titleText(item.text) }}
               </b-breadcrumb-item>
             </b-breadcrumb>
           </div>
@@ -115,6 +115,17 @@ export default {
     BDropdown,
     BDropdownItem,
     BButton,
+  },
+  methods: {
+    titleText(title) {
+      const regex = title.match('{{(.*)}}')
+      if (regex != null) {
+        const [, param] = regex
+        return this.$router.currentRoute.params[param]
+      }
+
+      return title
+    },
   },
 }
 </script>
